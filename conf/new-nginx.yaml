@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-nginx-dp
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: nginx
+      track: gray
+  template:
+    metadata:
+      labels:
+        app: nginx
+        track: gray
+    spec:
+      containers:
+      - name: old-nginx
+        image: voidking/nginx:v2.0
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
