@@ -1,0 +1,394 @@
+﻿-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 0
+deployment.spec.replicas: 1
+deployment.status.replicas: 0
+deployment.status.updatedReplicas: 0
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 0
+condition.type: Progressing, condition.status: True, condition.reason: NewReplicaSetCreated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ContainerCreating
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ErrImagePull
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: True, condition.reason: ReplicaSetUpdated
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff
+-------------deployment status------------
+deployment.name: nginx-deployment
+deployment.generation: 1
+deployment.status.observedGeneration: 1
+deployment.spec.replicas: 1
+deployment.status.replicas: 1
+deployment.status.updatedReplicas: 1
+deployment.status.readyReplicas: 0
+deployment.status.unavailableReplicas: 1
+condition.type: Available, condition.status: False, condition.reason: MinimumReplicasUnavailable
+condition.type: Progressing, condition.status: False, condition.reason: ProgressDeadlineExceeded
+-------------pod 0 status------------
+pod.name: nginx-deployment-cb4b64fbf-tv5fw
+pod.status.phase: Pending
+condition.type: Initialized, condition.status: True, conditon.reason: 
+condition.type: Ready, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: ContainersReady, condition.status: False, conditon.reason: ContainersNotReady
+condition.type: PodScheduled, condition.status: True, conditon.reason: 
+containerStatus.state.waiting.reason: ImagePullBackOff

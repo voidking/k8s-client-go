@@ -1,0 +1,234 @@
+{
+    "apiVersion": "extensions/v1beta1",
+    "kind": "Deployment",
+    "metadata": {
+        "annotations": {
+            "deployment.kubernetes.io/revision": "1"
+        },
+        "creationTimestamp": "2019-09-14T02:47:59Z",
+        "generation": 1,
+        "labels": {
+            "app": "hello-node"
+        },
+        "name": "hello-node",
+        "namespace": "default",
+        "resourceVersion": "15327",
+        "selfLink": "/apis/extensions/v1beta1/namespaces/default/deployments/hello-node",
+        "uid": "c1895104-768b-4d72-b3da-c526d554c3ac"
+    },
+    "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+            "matchLabels": {
+                "app": "hello-node"
+            }
+        },
+        "strategy": {
+            "rollingUpdate": {
+                "maxSurge": "25%",
+                "maxUnavailable": "25%"
+            },
+            "type": "RollingUpdate"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "hello-node"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "voidking/hello-node",
+                        "imagePullPolicy": "Always",
+                        "name": "hello-node",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File"
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "terminationGracePeriodSeconds": 30
+            }
+        }
+    },
+    "status": {
+        "availableReplicas": 1,
+        "conditions": [
+            {
+                "lastTransitionTime": "2019-09-14T02:57:11Z",
+                "lastUpdateTime": "2019-09-14T02:57:11Z",
+                "message": "Deployment has minimum availability.",
+                "reason": "MinimumReplicasAvailable",
+                "status": "True",
+                "type": "Available"
+            },
+            {
+                "lastTransitionTime": "2019-09-14T02:47:59Z",
+                "lastUpdateTime": "2019-09-14T02:57:11Z",
+                "message": "ReplicaSet \"hello-node-6747d458b6\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+            }
+        ],
+        "observedGeneration": 1,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "updatedReplicas": 1
+    }
+}
+
+
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2019-09-14T02:47:59Z",
+                "generateName": "hello-node-6747d458b6-",
+                "labels": {
+                    "app": "hello-node",
+                    "pod-template-hash": "6747d458b6"
+                },
+                "name": "hello-node-6747d458b6-d757m",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "hello-node-6747d458b6",
+                        "uid": "35667d34-a869-41d9-a70e-b625983f44be"
+                    }
+                ],
+                "resourceVersion": "115191",
+                "selfLink": "/api/v1/namespaces/default/pods/hello-node-6747d458b6-d757m",
+                "uid": "59fee4b1-56b1-4bbc-9203-bd41ea2a809d"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "voidking/hello-node",
+                        "imagePullPolicy": "Always",
+                        "name": "hello-node",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-wgzmw",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "minikube",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-wgzmw",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-wgzmw"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-09-14T02:47:59Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-09-19T02:21:38Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-09-19T02:21:38Z",
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-09-14T02:47:59Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://13b94c3851ef5076f00e5a2556bae99412c4a9afb665c1f799fabdee464179d9",
+                        "image": "voidking/hello-node:latest",
+                        "imageID": "docker-pullable://voidking/hello-node@sha256:99c8506b04d1d25fbf18b98f752e71d552932e97b3288b7e7759b266441cd0e0",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "docker://24b445a5d216e2cd815fd1185ae459773cd6c5409fe51ff3d0197b30baf03a69",
+                                "exitCode": 137,
+                                "finishedAt": "2019-09-18T12:12:16Z",
+                                "reason": "Error",
+                                "startedAt": "2019-09-18T11:08:38Z"
+                            }
+                        },
+                        "name": "hello-node",
+                        "ready": true,
+                        "restartCount": 4,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-09-19T02:21:38Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.2.15",
+                "phase": "Running",
+                "podIP": "172.17.0.2",
+                "qosClass": "BestEffort",
+                "startTime": "2019-09-14T02:47:59Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
