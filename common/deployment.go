@@ -42,24 +42,28 @@ func ReadDeploymentYaml(filename string) (apps_v1beta1.Deployment) {
 }
 
 func ApplyDeployment(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment) {
-	//replicas := int32(2)
-	//deployment.Spec.Replicas = &replicas
+	var namespace string
+	if deployment.Namespace != "" {
+		namespace = deployment.Namespace
+	}else {
+		namespace = "default"
+	}
 
 	// 查询k8s是否有该deployment
-	_, err := clientset.AppsV1beta1().Deployments("default").Get(deployment.Name, meta_v1.GetOptions{});
+	_, err := clientset.AppsV1beta1().Deployments(namespace).Get(deployment.Name, meta_v1.GetOptions{});
 	if err != nil {
 		if !errors.IsNotFound(err) {
 			fmt.Println(err)
 			return
 		}
 		// 不存在则创建
-		_, err = clientset.AppsV1beta1().Deployments("default").Create(&deployment)
+		_, err = clientset.AppsV1beta1().Deployments(namespace).Create(&deployment)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 	} else { // 已存在则更新
-		_, err = clientset.AppsV1beta1().Deployments("default").Update(&deployment)
+		_, err = clientset.AppsV1beta1().Deployments(namespace).Update(&deployment)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -69,12 +73,27 @@ func ApplyDeployment(clientset kubernetes.Clientset, deployment apps_v1beta1.Dep
 	fmt.Printf("apply deployment %s success!\n", deployment.Name)
 }
 
-func GetDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment) {
-
-	k8sDeployment, err := clientset.AppsV1beta1().Deployments("default").Get(deployment.Name, meta_v1.GetOptions{})
+func DeleteDeployment(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment){
+	var namespace string
+	if deployment.Namespace != "" {
+		namespace = deployment.Namespace
+	}else {
+		namespace = "default"
+	}
+	err := clientset.AppsV1beta1().Deployments(namespace).Delete(deployment.Name, &meta_v1.DeleteOptions{})
 	if err != nil {
 		fmt.Println(err)
 		return
+	}
+	fmt.Printf("delete deployment %s success!\n", deployment.Name)
+}
+
+func GetDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment) (success bool,reasons []string, err error) {
+
+	// 获取deployment状态
+	k8sDeployment, err := clientset.AppsV1beta1().Deployments("default").Get(deployment.Name, meta_v1.GetOptions{})
+	if err != nil {
+		return false,[]string{"get deployments status error"}, err
 	}
 
 	// 获取pod的状态
@@ -86,14 +105,21 @@ func GetDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1beta1
 
 	podList, err := clientset.CoreV1().Pods("default").List(meta_v1.ListOptions{LabelSelector: labelSelector})
 	if err != nil {
-		fmt.Println(err)
-		return
+		return false, []string{"get pods status error"}, err
 	}
 
 	readyPod := 0
+	unavailablePod := 0
+	waitingReasons := []string{}
 	for _, pod := range podList.Items {
+		// 记录等待原因
+		for _, containerStatus := range pod.Status.ContainerStatuses{
+			if containerStatus.State.Waiting != nil {
+				reason := "pod " + pod.Name + ", container " + containerStatus.Name + ", waiting reason: " + containerStatus.State.Waiting.Reason
+				waitingReasons = append(waitingReasons, reason)
+			}
+		}
 
-		// pod进行状态判定
 		podScheduledCondition := GetPodCondition(pod.Status, core_v1.PodScheduled)
 		initializedCondition := GetPodCondition(pod.Status, core_v1.PodInitialized)
 		readyCondition := GetPodCondition(pod.Status, core_v1.PodReady)
@@ -105,31 +131,45 @@ func GetDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1beta1
 			readyCondition.Status == "True" &&
 			containersReadyCondition.Status == "True" {
 			readyPod++
+		}else {
+			unavailablePod++
 		}
+	}
+
+	// 根据container状态判定
+	if len(waitingReasons) != 0 {
+		return false, waitingReasons, nil
+	}
+
+	// 根据pod状态判定
+	if int32(readyPod) < *(k8sDeployment.Spec.Replicas) ||
+		int32(unavailablePod) != 0{
+		return false, []string{"pods not ready!"}, nil
 	}
 
 	// deployment进行状态判定
 	availableCondition := GetDeploymentCondition(k8sDeployment.Status, apps_v1beta1.DeploymentAvailable)
 	progressingCondition := GetDeploymentCondition(k8sDeployment.Status, apps_v1beta1.DeploymentProgressing)
-	if k8sDeployment.Status.UpdatedReplicas == *(k8sDeployment.Spec.Replicas) &&
-		k8sDeployment.Status.Replicas == *(k8sDeployment.Spec.Replicas) &&
-		k8sDeployment.Status.AvailableReplicas == *(k8sDeployment.Spec.Replicas) &&
-		k8sDeployment.Status.ObservedGeneration == k8sDeployment.Generation &&
-		availableCondition.Status == "True" &&
-		progressingCondition.Status == "True" {
 
-		fmt.Printf("Determined by deployment status，%s deploy success！\n", deployment.Name)
+	if k8sDeployment.Status.UpdatedReplicas != *(k8sDeployment.Spec.Replicas) ||
+		k8sDeployment.Status.Replicas != *(k8sDeployment.Spec.Replicas) ||
+		k8sDeployment.Status.AvailableReplicas != *(k8sDeployment.Spec.Replicas) ||
+		availableCondition.Status != "True" ||
+		progressingCondition.Status != "True" {
+		return false, []string{"deployments not ready!"}, nil
 	}
 
-	if int32(readyPod) == *(k8sDeployment.Spec.Replicas) {
-		fmt.Printf("Determined by pod status，%s deploy success！\n", deployment.Name)
+	if k8sDeployment.Status.ObservedGeneration < k8sDeployment.Generation {
+		return false, []string{"observed generation less than generation!"}, nil
 	}
 
+	// 发布成功
+	return true, []string{}, nil
 }
 
 func PrintDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment) {
 
-	// 获取pod的状态
+	// 拼接selector
 	labelSelector := ""
 	for key, value := range deployment.Spec.Selector.MatchLabels {
 		labelSelector = labelSelector + key + "=" + value + ","
@@ -157,13 +197,13 @@ func PrintDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1bet
 			fmt.Printf("condition.type: %s, condition.status: %s, condition.reason: %s\n", condition.Type, condition.Status, condition.Reason)
 		}
 
+		// 获取pod状态
 		podList, err := clientset.CoreV1().Pods("default").List(meta_v1.ListOptions{LabelSelector: labelSelector})
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		readyPod := 0
 		for index, pod := range podList.Items {
 			// 打印pod的状态
 			fmt.Printf("-------------pod %d status------------\n", index)
@@ -181,38 +221,21 @@ func PrintDeploymentStatus(clientset kubernetes.Clientset, deployment apps_v1bet
 					fmt.Printf("containerStatus.state.running.startedAt: %s\n", containerStatus.State.Running.StartedAt)
 				}
 			}
-
-			// pod进行状态判定
-			podScheduledCondition := GetPodCondition(pod.Status, core_v1.PodScheduled)
-			initializedCondition := GetPodCondition(pod.Status, core_v1.PodInitialized)
-			readyCondition := GetPodCondition(pod.Status, core_v1.PodReady)
-			containersReadyCondition := GetPodCondition(pod.Status, core_v1.ContainersReady)
-
-			if pod.Status.Phase == "Running" &&
-				podScheduledCondition.Status == "True" &&
-				initializedCondition.Status == "True" &&
-				readyCondition.Status == "True" &&
-				containersReadyCondition.Status == "True" {
-				readyPod++
-			}
 		}
 
-		// deployment进行状态判定
 		availableCondition := GetDeploymentCondition(k8sDeployment.Status, apps_v1beta1.DeploymentAvailable)
 		progressingCondition := GetDeploymentCondition(k8sDeployment.Status, apps_v1beta1.DeploymentProgressing)
 		if k8sDeployment.Status.UpdatedReplicas == *(k8sDeployment.Spec.Replicas) &&
 			k8sDeployment.Status.Replicas == *(k8sDeployment.Spec.Replicas) &&
 			k8sDeployment.Status.AvailableReplicas == *(k8sDeployment.Spec.Replicas) &&
-			k8sDeployment.Status.ObservedGeneration == k8sDeployment.Generation &&
+			k8sDeployment.Status.ObservedGeneration >= k8sDeployment.Generation &&
 			availableCondition.Status == "True" &&
 			progressingCondition.Status == "True" {
-
-			fmt.Printf("Determined by deployment status，%s deploy success！\n", deployment.Name)
-		}
-
-		if int32(readyPod) == *(k8sDeployment.Spec.Replicas) {
-			fmt.Printf("Determined by pod status，%s deploy success！\n", deployment.Name)
-			break
+			fmt.Printf("-------------deploy status------------\n")
+			fmt.Println("success!")
+		}else{
+			fmt.Printf("-------------deploy status------------\n")
+			fmt.Println("waiting...")
 		}
 
 		time.Sleep(3 * time.Second)

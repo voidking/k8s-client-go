@@ -86,7 +86,6 @@ func UpdateDeploy(clientset kubernetes.Clientset, deployment apps_v1beta1.Deploy
 		//查看新的deployment状态
 		PrintDeploymentStatus(clientset, deployment)
 
-
 		if new_replicas == now_replicas {
 			fmt.Println("更新发布完成！")
 			break
@@ -95,9 +94,9 @@ func UpdateDeploy(clientset kubernetes.Clientset, deployment apps_v1beta1.Deploy
 			input := bufio.NewScanner(os.Stdin)
 			input.Scan()
 			confirm := input.Text()
-			if confirm == "Y"{
+			if confirm == "Y" {
 				continue
-			}else{
+			} else {
 				break
 			}
 		}
@@ -110,4 +109,20 @@ func RollBack(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment
 	new_deployment.Spec.Replicas = &new_replicas
 	ApplyDeployment(clientset, new_deployment)
 	fmt.Println("回滚完成！")
+}
+
+// 灰度发布2
+func GrayDeploy2(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment, image string, replicas int32) {
+	deployment.Name = deployment.Name + "-gray"
+	deployment.Spec.Replicas = &replicas
+	deployment.Spec.Template.Spec.Containers[0].Image = image
+
+	ApplyDeployment(clientset, deployment)
+}
+
+func UpdateDeploy2(clientset kubernetes.Clientset, deployment apps_v1beta1.Deployment, image string) {
+	deployment.Spec.Template.Spec.Containers[0].Image = image
+	ApplyDeployment(clientset, deployment)
+	deployment.Name = deployment.Name + "-gray"
+	DeleteDeployment(clientset, deployment)
 }

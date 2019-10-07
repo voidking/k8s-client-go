@@ -15,7 +15,8 @@ func main() {
 		return
 	}
 
-	testPod(clientset)
+	//testDeployment(clientset)
+	testDeploy(clientset)
 }
 
 func testPod(clientset kubernetes.Clientset){
@@ -29,12 +30,13 @@ func testPod(clientset kubernetes.Clientset){
 }
 
 func testDeployment(clientset kubernetes.Clientset){
-	deployment := common.ReadDeploymentYaml("./conf/old-nginx.yaml")
+	deployment := common.ReadDeploymentYaml("./conf/nginx.yaml")
 	//common.ApplyDeployment(clientset, deployment)
-	common.GetDeploymentStatus(clientset, deployment)
-
-	new_deployment := common.ReadDeploymentYaml("./conf/new-nginx.yaml")
-	common.GetDeploymentStatus(clientset, new_deployment)
+	success, reasons, err := common.GetDeploymentStatus(clientset, deployment)
+	fmt.Println(success)
+	fmt.Println(reasons)
+	fmt.Println(err)
+	//common.PrintDeploymentStatus(clientset, deployment)
 }
 
 func testService(clientset kubernetes.Clientset){
@@ -49,11 +51,13 @@ func testService(clientset kubernetes.Clientset){
 }
 
 func testDeploy(clientset kubernetes.Clientset){
-	deployment := common.ReadDeploymentYaml("./conf/old-nginx.yaml")
-	new_deployment := common.ReadDeploymentYaml("./conf/new-nginx.yaml")
-	service := common.ReadServiceYaml("./conf/nginx-service.yaml")
+	deployment := common.ReadDeploymentYaml("./conf/nginx.yaml")
+	//new_deployment := common.ReadDeploymentYaml("./conf/new-nginx.yaml")
+	//service := common.ReadServiceYaml("./conf/nginx-service.yaml")
 
 	//common.GrayDeploy(clientset, deployment, new_deployment, service)
-	common.UpdateDeploy(clientset, deployment, new_deployment, service, 1)
+	//common.UpdateDeploy(clientset, deployment, new_deployment, service, 1)
 	//common.RollBack(clientset, deployment, new_deployment)
+	//common.GrayDeploy2(clientset, deployment, "voidking/nginx:v2.0", 1)
+	common.UpdateDeploy2(clientset, deployment, "voidking/nginx:v2.0")
 }
